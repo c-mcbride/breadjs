@@ -1,0 +1,12 @@
+body{
+    background-color:#282A36;
+    color: #F8F8F2;
+}
+
+.budget-line-item{
+    color: #50FA7B;
+}
+
+ul{
+    list-style-type: none;
+}

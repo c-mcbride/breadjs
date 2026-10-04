@@ -10,17 +10,14 @@
   </head>
   <body>
     <div class="button-and-input">
+      <label for="budgetLineItem">Line Item:</label>
+      <input type="text" id="budgetLineItemTextInput" name="budgetLineItemTextInput">
+      <button onclick="addBudgetLineItem()" class="add-budget-line-item-button">Add</button>
       
-        <label for="budgetLineItem">Line Item:</label>
-        <input type="text" id="budgetLineItem" name="budgetLineItem">
-        <button onclick="addBudgetLineItem()" class="add-budget-line-item">Add</button>
-        
 
-        <ul id="budgetLineItemsList">
+      <ul id="budgetLineItemsList" class="budget-line-items-list">
 
-        </ul>
-
-      
+      </ul>
     </div>
   </body>
 </html>
