@@ -4,11 +4,6 @@ const addLineItemButton = document.querySelector('.add-budget-line-item');
 //Grab the unordered List
 const budgetList = document.querySelector('#budgetLineItems');
 
-//2. Add the event listener 
-addLineItemButton.addEventListener('click', (event) => {
-    console.log('Button was clicked!', event);
-});
-
 /**
  * Grab text the user enters in a single text back. Add it to list on page
  */

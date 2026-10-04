@@ -5,6 +5,9 @@ body{
 
 .budget-line-item{
     color: #50FA7B;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: #F8F8F2;;
 }
 
 ul{
