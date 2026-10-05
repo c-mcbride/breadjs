@@ -4,29 +4,46 @@ const addLineItemButton = document.querySelector('.add-budget-line-item');
 //Grab the unordered List
 const budgetList = document.querySelector('#budgetLineItems');
 
-/**
- * Grab text the user enters in a single text back. Add it to list on page
- */
-function addBudgetLineItem()
-{
-    var actualBudgetList = document.getElementById('budgetLineItemsList'), //Grab reference to the dom list
-        budgetLineItemContainer = document.createElement("li"), //Create list element blank
-        budgetCategoryDiv = document.createElement("div"), //create a div to hold the text
-        budgetCategoryValuesDiv = document.createElement("div"),
-        //Create budget amount textbox....Call Create textbox class
-        budgetCategoryValueAmountBox = createTextBox();
-      
-    //Put user text into text div
-    budgetCategoryDiv.textContent = document.getElementById('budgetLineItemTextInput').value;
-    budgetCategoryValuesDiv.appendChild(budgetCategoryValueAmountBox); //Add amount input field to values div
+/*
+  +-------------------------------------------------------------------+
+  | budgetLineItemContainer  (li, flex container)                     |
+  |                                                                   |
+  |  +--------------------+              +--------------------------+ |
+  |  | budgetCategoryDiv  |              | budgetCategoryValuesDiv  | |
+  |  | (category text)    |              |                          | |
+  |  |                    |              |  +--------------------+  | |
+  |  |                    |              |  | budgetCategoryValue|  | |
+  |  |                    |              |  | AmountBox (input)  |  | |
+  |  +--------------------+              |  +--------------------+  | |
+  |                                      +--------------------------+ |
+  +-------------------------------------------------------------------+
+*/
+function addBudgetLineItem(){
+    console.log("add budgetLineItemtoDOm is runningfunction is running");
+    const categoryText = document.getElementById('budgetLineItemTextInput').value;
+    const actualBudgetList = document.getElementById('budgetLineItemsList');
+    actualBudgetList.appendChild(createBudgetLineItem(categoryText));
+}
 
-    //Add class to the continer for flexbox
-    budgetLineItemContainer.classList.add("budget-line-item-container"); //add user entered text to category div
-    budgetLineItemContainer.appendChild(budgetCategoryDiv); //Add text div to container
+function createBudgetLineItem(categoryText){
+    //Right side div: Create inner most value box 
+    const budgetCategoryValueAmountBox = createTextBox();
+
+    const budgetCategoryValuesDiv = document.createElement("div");
+    budgetCategoryValuesDiv.classList.add("budget-category-values-div");
+    budgetCategoryValuesDiv.appendChild(budgetCategoryValueAmountBox);
+
+    //Left Side: Holds line item text
+    const budgetCategoryDiv = document.createElement("div");
+    budgetCategoryDiv.textContent = categoryText;
+
+    //Create list node and return it
+    const budgetLineItemContainer = document.createElement("li");
+    budgetLineItemContainer.classList.add("budget-line-item-container")
+    budgetLineItemContainer.appendChild(budgetCategoryDiv);
     budgetLineItemContainer.appendChild(budgetCategoryValuesDiv);
 
-    actualBudgetList.appendChild(budgetLineItemContainer); //Add single li container and it's children to the dom
-    console.log('Adding line item!');
+    return budgetLineItemContainer;
 }
 
 
