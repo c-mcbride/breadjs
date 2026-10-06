@@ -1,18 +1,10 @@
-//1. Select the line item buttom using css class
-const addLineItemButton = document.querySelector('.add-budget-line-item');
-
-//Grab the unordered List
-const budgetList = document.querySelector('#budgetLineItems');
-
 //This touches the dom and adds the list item on click
 function addBudgetLineItem(){
     console.log("add budgetLineItem is running");
 
-    const categoryText = document.getElementById('budgetLineItemTextInput').value;
-
     //Grab reference to the actual DOM list and add the new list node to it
     const actualBudgetList = document.getElementById('budgetLineItemsList'); 
-    actualBudgetList.appendChild(createBudgetLineItem(categoryText));
+    actualBudgetList.appendChild(createBudgetLineItem());
 }
 
 /*
@@ -29,9 +21,9 @@ function addBudgetLineItem(){
   |                                      +--------------------------+ |
   +-------------------------------------------------------------------+
 */
-function createBudgetLineItem(categoryText){
+function createBudgetLineItem(){
     //Right side div: Create inner most value box 
-    const budgetCategoryValueAmountBox = createTextBox();
+    const budgetCategoryValueAmountBox = createBudgetAmountTextBox();
 
     const budgetCategoryValuesDiv = document.createElement("div");
     budgetCategoryValuesDiv.classList.add("budget-category-values-div");
@@ -39,7 +31,9 @@ function createBudgetLineItem(categoryText){
 
     //Left Side: Holds line item text
     const budgetCategoryDiv = document.createElement("div");
-    budgetCategoryDiv.textContent = categoryText;
+
+    //create a budget input textbox
+    budgetCategoryDiv.appendChild(createBudgetCategoryTextBox());
 
     //Create list node and return the full line item
     const budgetLineItemContainer = document.createElement("li");
@@ -50,9 +44,19 @@ function createBudgetLineItem(categoryText){
     return budgetLineItemContainer;
 }
 
+//Create a textbox for budget category, inserts its own class name
+function createBudgetCategoryTextBox(){
+    
+    const textBox = document.createElement("input");
+
+    textBox.type = "text";
+    textBox.placeholder = "Category";
+    textBox.className = "budget-category-textbox";
+    return textBox;
+}
 
 //Used to create a budgeted amount checkbox
-function createTextBox(){
+function createBudgetAmountTextBox(){
     //Step 1: create the input element
     const textBox = document.createElement("input");
 

@@ -1,0 +1,4 @@
+so we need to instead of read text when button is click, call add text box and add the row
+
+<label for="budgetLineItem">Line Item:</label>
+          <input type="text" id="budgetLineItemTextInput" name="budgetLineItemTextInput">
