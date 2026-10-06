@@ -4,6 +4,17 @@ const addLineItemButton = document.querySelector('.add-budget-line-item');
 //Grab the unordered List
 const budgetList = document.querySelector('#budgetLineItems');
 
+//This touches the dom and adds the list item on click
+function addBudgetLineItem(){
+    console.log("add budgetLineItem is running");
+
+    const categoryText = document.getElementById('budgetLineItemTextInput').value;
+
+    //Grab reference to the actual DOM list and add the new list node to it
+    const actualBudgetList = document.getElementById('budgetLineItemsList'); 
+    actualBudgetList.appendChild(createBudgetLineItem(categoryText));
+}
+
 /*
   +-------------------------------------------------------------------+
   | budgetLineItemContainer  (li, flex container)                     |
@@ -18,13 +29,6 @@ const budgetList = document.querySelector('#budgetLineItems');
   |                                      +--------------------------+ |
   +-------------------------------------------------------------------+
 */
-function addBudgetLineItem(){
-    console.log("add budgetLineItemtoDOm is runningfunction is running");
-    const categoryText = document.getElementById('budgetLineItemTextInput').value;
-    const actualBudgetList = document.getElementById('budgetLineItemsList');
-    actualBudgetList.appendChild(createBudgetLineItem(categoryText));
-}
-
 function createBudgetLineItem(categoryText){
     //Right side div: Create inner most value box 
     const budgetCategoryValueAmountBox = createTextBox();
@@ -37,7 +41,7 @@ function createBudgetLineItem(categoryText){
     const budgetCategoryDiv = document.createElement("div");
     budgetCategoryDiv.textContent = categoryText;
 
-    //Create list node and return it
+    //Create list node and return the full line item
     const budgetLineItemContainer = document.createElement("li");
     budgetLineItemContainer.classList.add("budget-line-item-container")
     budgetLineItemContainer.appendChild(budgetCategoryDiv);
@@ -58,6 +62,3 @@ function createTextBox(){
     textBox.className = "budget-amount-textbox";
     return textBox;
 }
-
-
-//Add items to the list when the user enters a field and submits

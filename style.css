@@ -13,7 +13,18 @@ body{
     outline-color: #F8F8F2;;
 }
 
+.main-budget-area-container{
+    display: grid;
+    grid-template-columns: 6% 78% 16%;
+}
+
+.button-and-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
 
 ul{
     list-style-type: none;
+    padding: 0px;
 }

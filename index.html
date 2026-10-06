@@ -8,16 +8,25 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
   </head>
+
   <body>
-    <div class="button-and-input">
-      <label for="budgetLineItem">Line Item:</label>
-      <input type="text" id="budgetLineItemTextInput" name="budgetLineItemTextInput">
-      <button onclick="addBudgetLineItem()" class="add-budget-line-item-button">Add</button>
-      
+    <div class="main-budget-area-container">
 
-      <ul id="budgetLineItemsList">
+      <div></div>
+      <div class="button-and-input">
+        <div>
+          <label for="budgetLineItem">Line Item:</label>
+          <input type="text" id="budgetLineItemTextInput" name="budgetLineItemTextInput">
+          <button onclick="addBudgetLineItem()" class="add-budget-line-item-button">Add</button>
+        </div>
 
-      </ul>
+        <div>
+          <ul id="budgetLineItemsList">
+          </ul>
+        </div>
+      </div>
+      <div></div>
+
     </div>
   </body>
 </html>
