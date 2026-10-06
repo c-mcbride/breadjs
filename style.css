@@ -1,6 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
 body{
     background-color:#282A36;
     color: #F8F8F2;
+}
+
+h1{
+    margin: 0;
+}
+
+.header{
+    display: flex;
+    height: 15vh;
+    align-items: center;
+    justify-content: center;
 }
 
 .budget-line-item-container{
@@ -23,6 +38,7 @@ body{
     flex-direction: column;
     justify-content: flex-end;
 }
+
 
 ul{
     list-style-type: none;
