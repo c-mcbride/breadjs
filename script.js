@@ -52,6 +52,24 @@ function createBudgetCategoryTextBox(){
     textBox.type = "text";
     textBox.placeholder = "Category";
     textBox.className = "budget-category-textbox";
+
+    textBox.addEventListener('change', (event) => {
+        console.log('budgetLineItemSubmitted Running....')
+
+        //1. Grab the entered value
+        const enteredText = event.target.value;
+
+        //if nothing is entered stop
+        if(!enteredText.trim()) return;
+
+        //2.Create a new text element
+        const textNode = document.createElement('span');
+        textNode.textContent = enteredText;
+
+        //3. Swap the input box with the text node
+        event.target.replaceWith(textNode);
+    });
+
     return textBox;
 }
 
