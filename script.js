@@ -1,9 +1,10 @@
-//This touches the dom and adds the list item on click
+//Adds the line item, called from HTML when the Add Category Button is Clicked 
 function addBudgetLineItem(){
     console.log("add budgetLineItem is running");
 
     //Grab reference to the actual DOM list and add the new list node to it
-    const actualBudgetList = document.getElementById('budgetLineItemsList'); 
+    const actualBudgetList = document.getElementById('budgetLineItemsList');
+
     actualBudgetList.appendChild(createBudgetLineItem());
 }
 
@@ -41,6 +42,8 @@ function createBudgetLineItem(){
     budgetLineItemContainer.appendChild(budgetCategoryDiv);
     budgetLineItemContainer.appendChild(budgetCategoryValuesDiv);
 
+    
+    addAbilitytoDeleteLineItem(budgetLineItemContainer);
     return budgetLineItemContainer;
 }
 
@@ -78,4 +81,11 @@ function createBudgetCategoryTextBox(textBoxType){
     });
 
     return textBox;
+}
+
+function addAbilitytoDeleteLineItem(budgetLineItemContainer){
+    budgetLineItemContainer.addEventListener('contextmenu', (event) => {
+        console.log("Right click listner is firing");
+        event.preventDefault();
+    });
 }
