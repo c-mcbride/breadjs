@@ -1,3 +1,14 @@
+//When the user clicks away, get rid of the context menu
+document.addEventListener("click", () => {
+    contextMenu.style.visibility = null;
+});
+
+//Grab a reference to the context menu 
+const contextMenu = document.querySelector(".context");
+
+let rowThatWasRightClicked = null;
+
+
 //Adds the line item, called from HTML when the Add Category Button is Clicked 
 function addBudgetLineItem(){
     console.log("add budgetLineItem is running");
@@ -83,26 +94,21 @@ function createBudgetCategoryTextBox(textBoxType){
     return textBox;
 }
 
-function addAbilitytoDeleteLineItem(budgetLineItemContainer){
 
-    //Grab a reference to the context menu 
-    const contextMenu = document.querySelector(".context");
+function addAbilitytoDeleteLineItem(budgetLineItemContainer){
 
     //Add the right click context menu functionality to the node before its appended
     //contextmenu is what the browser class it when a user right clicks
     //contextMenu is the HTML name for the ul I created
     budgetLineItemContainer.addEventListener('contextmenu', (event) => {
-        console.log("Right click listner is firing");
+        console.log("Right click listener is firing");
         event.preventDefault();
 
+        rowThatWasRightClicked = budgetLineItemContainer;
+        
         //Move the context menu to the users pointer 
         updateMenuPosition(event.clientX, event.clientY);
         contextMenu.style.visibility = "visible";
-    });
-
-    //When the user clicks away, get rid of the context menu
-    document.addEventListener("click", () => {
-        contextMenu.style.visibility = null;
     });
 
     //grab x and y from the caller, use it to decide where to open the menu
@@ -119,6 +125,7 @@ function addAbilitytoDeleteLineItem(budgetLineItemContainer){
 
 document.querySelector("#deleteLineItem").addEventListener("click", () => {
     console.log("You clicked the delete line item button");
+    rowThatWasRightClicked.remove();
 });
 
  
