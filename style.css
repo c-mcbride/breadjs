@@ -44,3 +44,31 @@ ul{
     list-style-type: none;
     padding: 0px;
 }
+
+.context{
+    width: 200px;
+    margin: 0;
+    padding-left: 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background: #F8F8F2;
+    color: black; 
+    position: fixed;
+    font-size: 16px;
+    visibility: hidden;
+}
+
+.context-link{
+    list-style-type: none;
+    padding: 0.75em 1em;
+    font-size: 0.85em;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+}
+
+.context-link:hover{
+    background: #eeeeee;
+}

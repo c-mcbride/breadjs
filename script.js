@@ -84,8 +84,41 @@ function createBudgetCategoryTextBox(textBoxType){
 }
 
 function addAbilitytoDeleteLineItem(budgetLineItemContainer){
+
+    //Grab a reference to the context menu 
+    const contextMenu = document.querySelector(".context");
+
+    //Add the right click context menu functionality to the node before its appended
+    //contextmenu is what the browser class it when a user right clicks
+    //contextMenu is the HTML name for the ul I created
     budgetLineItemContainer.addEventListener('contextmenu', (event) => {
         console.log("Right click listner is firing");
         event.preventDefault();
+
+        //Move the context menu to the users pointer 
+        updateMenuPosition(event.clientX, event.clientY);
+        contextMenu.style.visibility = "visible";
     });
+
+    //When the user clicks away, get rid of the context menu
+    document.addEventListener("click", () => {
+        contextMenu.style.visibility = null;
+    });
+
+    //grab x and y from the caller, use it to decide where to open the menu
+    const updateMenuPosition = (x,y) => {
+
+        //make it so the menu doesn't appear offscreen
+        const maxTopValue = window.innerHeight - contextMenu.offsetHeight;
+        const maxLeftValue = window.innerWidth - contextMenu.offsetWidth;
+
+        contextMenu.style.left = `${Math.min(maxLeftValue, x)}px`;
+        contextMenu.style.top = `${Math.min(maxTopValue, y)}px`;
+    };
 }
+
+document.querySelector("#deleteLineItem").addEventListener("click", () => {
+    console.log("You clicked the delete line item button");
+});
+
+ 
