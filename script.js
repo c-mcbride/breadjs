@@ -4,14 +4,41 @@ const contextMenu = document.querySelector(".context");
 //Used for deletes later
 let rowThatWasRightClicked = null;
 
-//Adds the line item, called from HTML when the Add Category Button is Clicked 
-function addBudgetLineItem(){
+//Grab a reference to the budget Category conatiner 
+const budgetCategoryContainer = document.querySelector('.create-budget-category-group-container');
+
+function addBudgetCategoryGroup(){
+    console.log("add budget category running");
+
+    //CreateDiv to hold the entire category with a button and line items
+    const budgetCategoryGroupDiv = document.createElement('div');
+
+    //build ul list
+    const budgetLineItemList = document.createElement('ul');
+    budgetLineItemList.classList.add('budget-line-item-list');
+
+    //Add the button
+    const addBudgetLineItemButton = document.createElement('button');
+    addBudgetLineItemButton.textContent = 'Add Category';
+    addBudgetLineItemButton.classList.add('add-budget-line-item-button');
+    
+    addBudgetLineItemButton.addEventListener('click', () => {
+        addBudgetLineItem(budgetLineItemList);
+    });
+
+
+    budgetCategoryGroupDiv.appendChild(addBudgetLineItemButton);
+    budgetCategoryGroupDiv.appendChild(budgetLineItemList);
+
+    
+    budgetCategoryContainer.appendChild(budgetCategoryGroupDiv);
+
+}
+
+//Adds the line item, called from addBudgetCategoryGroup functionwhen the Add Category Button is Clicked 
+function addBudgetLineItem(budgetLineItemList){
     console.log("add budgetLineItem is running");
-
-    //Grab reference to the actual DOM list and add the new list node to it
-    const actualBudgetList = document.getElementById('budgetLineItemsList');
-
-    actualBudgetList.appendChild(createBudgetLineItem());
+    budgetLineItemList.appendChild(createBudgetLineItem());
 }
 
 /*
@@ -68,6 +95,9 @@ function createBudgetCategoryTextBox(textBoxType){
         textBox.placeholder = "budgeted amount";
         textBox.className = "budget-amount-textbox";
     }
+    else{
+        console.error("Invalid textBoxType")
+    }
 
     textBox.addEventListener('change', (event) => {
         console.log('budgetLineItemSubmitted Running....')
@@ -102,8 +132,8 @@ function updateMenuPosition(x,y){
 function addAbilityToDeleteLineItem(budgetLineItemContainer){
 
     //Add the right click context menu functionality to the node before its appended
-    //contextmenu is what the browser class it when a user right clicks
-    //contextMenu is the HTML name for the ul I created
+    //contextmenu is the name of the event when a user right clicks
+    //contextMenu is the variable holding the context menu ul from the html file
     budgetLineItemContainer.addEventListener('contextmenu', (event) => {
         console.log("Right click listener is firing");
         event.preventDefault();
@@ -119,6 +149,7 @@ function addAbilityToDeleteLineItem(budgetLineItemContainer){
 document.querySelector("#deleteLineItem").addEventListener("click", () => {
     console.log("You clicked the delete line item button");
     rowThatWasRightClicked.remove();
+    rowThatWasRightClicked = null;
 });
 
 //When the user clicks away, get rid of the context menu
