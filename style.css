@@ -11,6 +11,23 @@ h1{
     margin: 0;
 }
 
+.budget-category-groups-and-line-items{
+    display: flex;
+    flex-direction: column;
+}
+
+.create-budget-category-group-container{
+    display: flex;
+    flex-direction: column;
+    outline: 2px solid rgba(128, 128, 128, 0.5);
+}
+
+.add-budget-category-group-button{
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+
 .header{
     display: flex;
     height: 5vh;
@@ -71,4 +88,9 @@ ul{
 
 .context-link:hover{
     background: #eeeeee;
+}
+
+.category-name-and-add-button{
+    display: flex;
+    gap: 10px;
 }

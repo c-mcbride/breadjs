@@ -17,22 +17,33 @@ function addBudgetCategoryGroup(){
     const budgetLineItemList = document.createElement('ul');
     budgetLineItemList.classList.add('budget-line-item-list');
 
+    /*
+    +-----------------------------------------------------------------+
+    | categoryNameAndAddButton  (div, .category-name-and-add-button)  |
+    |                                                                 |
+    |  +---------------------------+   +---------------------------+  |
+    |  | createBudgetCategoryText  |   | addBudgetLineItemButton   |  |
+    |  | Box("budgetCategoryGroup")|   | (button, "Add Category")  |  |
+    |  | (input, swaps to text)    |   |                           |  |
+    |  +---------------------------+   +---------------------------+  |
+    +-----------------------------------------------------------------+
+    */
+    const categoryNameAndAddButton = document.createElement('div');
+    categoryNameAndAddButton.classList.add('category-name-and-add-button');
+    //Add a textbox 
+    categoryNameAndAddButton.appendChild(createBudgetCategoryTextBox("budgetCategoryGroup"));
     //Add the button
     const addBudgetLineItemButton = document.createElement('button');
     addBudgetLineItemButton.textContent = 'Add Category';
     addBudgetLineItemButton.classList.add('add-budget-line-item-button');
-    
     addBudgetLineItemButton.addEventListener('click', () => {
         addBudgetLineItem(budgetLineItemList);
     });
+    categoryNameAndAddButton.appendChild(addBudgetLineItemButton);
 
-
-    budgetCategoryGroupDiv.appendChild(addBudgetLineItemButton);
+    budgetCategoryGroupDiv.appendChild(categoryNameAndAddButton);
     budgetCategoryGroupDiv.appendChild(budgetLineItemList);
-
-    
     budgetCategoryContainer.appendChild(budgetCategoryGroupDiv);
-
 }
 
 //Adds the line item, called from addBudgetCategoryGroup functionwhen the Add Category Button is Clicked 
@@ -94,6 +105,11 @@ function createBudgetCategoryTextBox(textBoxType){
         textBox.type = "text";
         textBox.placeholder = "budgeted amount";
         textBox.className = "budget-amount-textbox";
+    }
+    else if(textBoxType === "budgetCategoryGroup"){
+        textBox.type = "text";
+        textBox.placeholder = "Category Group Name";
+        textBox.className = "budget-category-textbox"; //change later if needed
     }
     else{
         console.error("Invalid textBoxType")
