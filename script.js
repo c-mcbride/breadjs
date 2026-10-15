@@ -5,21 +5,22 @@ const contextMenu = document.querySelector(".context");
 let rowThatWasRightClicked = null;
 
 //Grab a reference to the budget Category conatiner 
-const budgetCategoryContainer = document.querySelector('.create-budget-category-group-container');
+const budgetCategoryContainer = document.querySelector('.groups');
 
 function addBudgetCategoryGroup(){
     console.log("add budget category running");
 
     //CreateDiv to hold the entire category with a button and line items
     const budgetCategoryGroupDiv = document.createElement('div');
+    budgetCategoryGroupDiv.classList.add('group');
 
     //build ul list
     const budgetLineItemList = document.createElement('ul');
-    budgetLineItemList.classList.add('budget-line-item-list');
+    budgetLineItemList.classList.add('group-list');
 
     /*
     +-----------------------------------------------------------------+
-    | categoryNameAndAddButton  (div, .category-name-and-add-button)  |
+    | categoryNameAndAddButton  (div, .group-header)  |
     |                                                                 |
     |  +---------------------------+   +---------------------------+  |
     |  | createBudgetCategoryText  |   | addBudgetLineItemButton   |  |
@@ -29,13 +30,13 @@ function addBudgetCategoryGroup(){
     +-----------------------------------------------------------------+
     */
     const categoryNameAndAddButton = document.createElement('div');
-    categoryNameAndAddButton.classList.add('category-name-and-add-button');
+    categoryNameAndAddButton.classList.add('group-header');
     //Add a textbox 
     categoryNameAndAddButton.appendChild(createBudgetCategoryTextBox("budgetCategoryGroup"));
     //Add the button
     const addBudgetLineItemButton = document.createElement('button');
     addBudgetLineItemButton.textContent = 'Add Category';
-    addBudgetLineItemButton.classList.add('add-budget-line-item-button');
+    addBudgetLineItemButton.classList.add('group-add-button');
     addBudgetLineItemButton.addEventListener('click', () => {
         addBudgetLineItem(budgetLineItemList);
     });
@@ -71,7 +72,7 @@ function createBudgetLineItem(){
     const budgetCategoryValueAmountBox = createBudgetCategoryTextBox("budgetAmount");
 
     const budgetCategoryValuesDiv = document.createElement("div");
-    budgetCategoryValuesDiv.classList.add("budget-category-values-div");
+    budgetCategoryValuesDiv.classList.add("row-values");
     budgetCategoryValuesDiv.appendChild(budgetCategoryValueAmountBox);
 
     //Left Side: Holds line item text
@@ -82,7 +83,7 @@ function createBudgetLineItem(){
 
     //Create list node and return the full line item
     const budgetLineItemContainer = document.createElement("li");
-    budgetLineItemContainer.classList.add("budget-line-item-container")
+    budgetLineItemContainer.classList.add("row")
     budgetLineItemContainer.appendChild(budgetCategoryDiv);
     budgetLineItemContainer.appendChild(budgetCategoryValuesDiv);
 

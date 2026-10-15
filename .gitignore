@@ -2,3 +2,15 @@ so we need to instead of read text when button is click, call add text box and a
 
 <label for="budgetLineItem">Line Item:</label>
           <input type="text" id="budgetLineItemTextInput" name="budgetLineItemTextInput">
+
+
+<div class="button-and-input">
+            <div>
+              <button onclick="addBudgetLineItem()" class="group-add-button">Add Category</button>
+            </div>
+
+            <div>
+              <ul id="budgetLineItemsList">
+              </ul>
+            </div>
+          </div>
