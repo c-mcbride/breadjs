@@ -120,7 +120,7 @@ function createInput(textBoxType){
         console.error("Invalid textBoxType")
     }
 
-    textBox.addEventListener('change', (event) => {
+    textBox.addEventListener('blur', (event) => {
         console.log('textBox event listner Running....')
 
         //1. Grab the entered value
