@@ -1,10 +1,12 @@
 * {
   box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
 }
 
 body{
     background-color:#282A36;
     color: #F8F8F2;
+    font-family: 'Quicksand', sans-serif;
 }
 
 h1{
@@ -15,6 +17,31 @@ ul{
     list-style-type: none;
     padding: 0px;
     background-color: #FFFFFF0D;
+    border-radius: 8px;
+    border: 1px solid #FFFFFF14;
+    color: white; 
+}
+
+input{
+    border: 1px solid #FFFFFF14;     /* Removes the default border */
+    outline: none;      /* Removes the active focus ring */
+    background: none;   /* Removes the default background color */
+    box-shadow: none; 
+    color: white;
+    border-radius: 6px;
+}
+
+input:hover{
+    border: 1px solid #FFFFFF2E; 
+}
+
+input:focus-visible{
+    border-color: #BD93F9;
+}
+
+.row-values{
+    text-align: left;
+    font-variant-numeric: tabular-nums;
 }
 
 .header{
@@ -47,6 +74,11 @@ ul{
     padding-top: 10px;
     padding-bottom: 15px;
     border-radius: 8px;
+    border: 1px solid #FFFFFF14;
+}
+
+.group-name-input{
+    font-weight: 600;
 }
 
 .group-list{
@@ -58,6 +90,10 @@ ul{
     margin: 25px 0;
     font-size: 0.9em;
     min-width: 400px;
+}
+
+.group-add-button{
+    background: none;
 }
 
 .row{

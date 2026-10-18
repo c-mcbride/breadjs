@@ -5,60 +5,63 @@ const contextMenu = document.querySelector(".context");
 let rowThatWasRightClicked = null;
 
 //Grab a reference to the budget Category conatiner 
-const budgetCategoryContainer = document.querySelector('.groups');
+const groups = document.querySelector('.groups');
 
-function addBudgetCategoryGroup(){
-    console.log("add budget category running");
+function addGroup(){
+    console.log("add group running");
 
     //CreateDiv to hold the entire category with a button and line items
-    const budgetCategoryGroupDiv = document.createElement('div');
-    budgetCategoryGroupDiv.classList.add('group');
+    const group = document.createElement('div');
+    group.classList.add('group');
 
     //build ul list
-    const budgetLineItemList = document.createElement('ul');
-    budgetLineItemList.classList.add('group-list');
+    const groupList = document.createElement('ul');
+    groupList.classList.add('group-list');
 
     /*
     +-----------------------------------------------------------------+
-    | categoryNameAndAddButton  (div, .group-header)  |
+    | groupHeader  (div, .group-header)  |
     |                                                                 |
     |  +---------------------------+   +---------------------------+  |
-    |  | createBudgetCategoryText  |   | addBudgetLineItemButton   |  |
+    |  | createBudgetCategoryText  |   | addRowButton   |  |
     |  | Box("budgetCategoryGroup")|   | (button, "Add Category")  |  |
     |  | (input, swaps to text)    |   |                           |  |
     |  +---------------------------+   +---------------------------+  |
     +-----------------------------------------------------------------+
     */
-    const categoryNameAndAddButton = document.createElement('div');
-    categoryNameAndAddButton.classList.add('group-header');
+    const groupHeader = document.createElement('div');
+    groupHeader.classList.add('group-header');
     //Add a textbox 
-    categoryNameAndAddButton.appendChild(createBudgetCategoryTextBox("budgetCategoryGroup"));
+    groupHeader.appendChild(createInput("groupName"));
     //Add the button
-    const addBudgetLineItemButton = document.createElement('button');
-    addBudgetLineItemButton.textContent = 'Add Category';
-    addBudgetLineItemButton.classList.add('group-add-button');
-    addBudgetLineItemButton.addEventListener('click', () => {
-        addBudgetLineItem(budgetLineItemList);
-    });
-    categoryNameAndAddButton.appendChild(addBudgetLineItemButton);
+    const addRowButton = document.createElement('button');
+    addRowButton.textContent = 'Add Category';
 
-    budgetCategoryGroupDiv.appendChild(categoryNameAndAddButton);
-    budgetCategoryGroupDiv.appendChild(budgetLineItemList);
-    budgetCategoryContainer.appendChild(budgetCategoryGroupDiv);
+
+    //addRowButton.textContent = 'Add Category';
+    addRowButton.classList.add('add-row-button');
+    addRowButton.addEventListener('click', () => {
+        addRow(groupList);
+    });
+    groupHeader.appendChild(addRowButton);
+
+    group.appendChild(groupHeader);
+    group.appendChild(groupList);
+    groups.appendChild(group);
 }
 
 //Adds the line item, called from addBudgetCategoryGroup functionwhen the Add Category Button is Clicked 
-function addBudgetLineItem(budgetLineItemList){
-    console.log("add budgetLineItem is running");
-    budgetLineItemList.appendChild(createBudgetLineItem());
+function addRow(groupList){
+    console.log("addRow is running");
+    groupList.appendChild(createRow());
 }
 
 /*
   +-------------------------------------------------------------------+
-  | budgetLineItemContainer  (li, flex container)                     |
+  | row  (li, flex container)                     |
   |                                                                   |
   |  +--------------------+              +--------------------------+ |
-  |  | budgetCategoryDiv  |              | budgetCategoryValuesDiv  | |
+  |  | rowName  |              | rowValues  | |
   |  | (category text)    |              |                          | |
   |  |                    |              |  +--------------------+  | |
   |  |                    |              |  | budgetCategoryValue|  | |
@@ -67,57 +70,58 @@ function addBudgetLineItem(budgetLineItemList){
   |                                      +--------------------------+ |
   +-------------------------------------------------------------------+
 */
-function createBudgetLineItem(){
+function createRow(){
     //Right side div: Create inner most value box 
-    const budgetCategoryValueAmountBox = createBudgetCategoryTextBox("budgetAmount");
+    const rowAmountInput = createInput("rowAmount");
 
-    const budgetCategoryValuesDiv = document.createElement("div");
-    budgetCategoryValuesDiv.classList.add("row-values");
-    budgetCategoryValuesDiv.appendChild(budgetCategoryValueAmountBox);
+    const rowValues = document.createElement("div");
+    rowValues.classList.add("row-values");
+    rowValues.appendChild(rowAmountInput);
 
     //Left Side: Holds line item text
-    const budgetCategoryDiv = document.createElement("div");
+    const rowName = document.createElement("div");
+    rowName.classList.add("row-name");
 
     //create a budget input textbox
-    budgetCategoryDiv.appendChild(createBudgetCategoryTextBox("budgetCategory"));
+    rowName.appendChild(createInput("rowName"));
 
     //Create list node and return the full line item
-    const budgetLineItemContainer = document.createElement("li");
-    budgetLineItemContainer.classList.add("row")
-    budgetLineItemContainer.appendChild(budgetCategoryDiv);
-    budgetLineItemContainer.appendChild(budgetCategoryValuesDiv);
+    const row = document.createElement("li");
+    row.classList.add("row")
+    row.appendChild(rowName);
+    row.appendChild(rowValues);
 
     
-    addAbilityToDeleteLineItem(budgetLineItemContainer);
-    return budgetLineItemContainer;
+    addAbilityToDeleteRow(row);
+    return row;
 }
 
 //Create a textbox for budget category, inserts its own class name
-function createBudgetCategoryTextBox(textBoxType){
+function createInput(textBoxType){
     
     const textBox = document.createElement("input");
 
-    if(textBoxType === "budgetCategory"){
+    if(textBoxType === "rowName"){
         textBox.type = "text";
         textBox.placeholder = "Category";
-        textBox.className = "budget-category-textbox";
+        textBox.className = "group-name-input";
     }
-    else if(textBoxType === "budgetAmount"){
+    else if(textBoxType === "rowAmount"){
         textBox.type = "text";
         textBox.placeholder = "budgeted amount";
-        textBox.className = "budget-amount-textbox";
+        textBox.className = "group-name-input";
     }
-    else if(textBoxType === "budgetCategoryGroup"){
+    else if(textBoxType === "groupName"){
         textBox.type = "text";
         textBox.placeholder = "Category Group Name";
-        textBox.className = "budget-category-textbox"; //change later if needed
+        textBox.className = "group-name-input"; //change later if needed
     }
     else{
         console.error("Invalid textBoxType")
     }
 
     textBox.addEventListener('change', (event) => {
-        console.log('budgetLineItemSubmitted Running....')
+        console.log('textBox event listner Running....')
 
         //1. Grab the entered value
         const enteredText = event.target.value;
@@ -128,6 +132,9 @@ function createBudgetCategoryTextBox(textBoxType){
         //2.Create a new text element
         const textNode = document.createElement('span');
         textNode.textContent = enteredText;
+
+        //Add a listener to give user the ability to edit text again
+        addAbilityToChangeText(textNode, textBoxType);
 
         //3. Swap the input box with the text node
         event.target.replaceWith(textNode);
@@ -146,20 +153,40 @@ function updateMenuPosition(x,y){
     contextMenu.style.top = `${Math.min(maxTopValue, y)}px`;
 }
 
-function addAbilityToDeleteLineItem(budgetLineItemContainer){
+function addAbilityToDeleteRow(row){
 
     //Add the right click context menu functionality to the node before its appended
     //contextmenu is the name of the event when a user right clicks
     //contextMenu is the variable holding the context menu ul from the html file
-    budgetLineItemContainer.addEventListener('contextmenu', (event) => {
+    row.addEventListener('contextmenu', (event) => {
         console.log("Right click listener is firing");
         event.preventDefault();
 
-        rowThatWasRightClicked = budgetLineItemContainer;
+        rowThatWasRightClicked = row;
 
         //Move the context menu to the users pointer 
         updateMenuPosition(event.clientX, event.clientY);
         contextMenu.style.visibility = "visible";
+    });
+}
+
+function addAbilityToChangeText(textNode, textBoxType){
+
+    textNode.addEventListener('click', (event) => {
+        console.log("addAbilityToChangeText is running.....");
+
+        //call the input factory
+        const newInputBox = createInput(textBoxType)
+
+        //Set the input with actual values from the textNode
+        newInputBox.value = textNode.textContent;
+
+        //Swap it with replaceWith
+        textNode.replaceWith(newInputBox);
+
+        //Call focus on it
+        newInputBox.focus();
+
     });
 }
 
@@ -173,5 +200,7 @@ document.querySelector("#deleteLineItem").addEventListener("click", () => {
 document.addEventListener("click", () => {
     contextMenu.style.visibility = null;
 });
+
+
 
  
