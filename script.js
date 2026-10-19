@@ -170,6 +170,18 @@ function addAbilityToDeleteRow(row){
     });
 }
 
+/**
+ * Makes a span editible again by turning it back into an input on click
+ * 
+ * The edit cycle:
+ *  input (blur, with text) -> span (click) -> input (text carried over) -> ...
+ * createInput build the input and swaps it for a span on blue. 
+ * This function gives that span a click listener that swaps it back
+ * into a fresh input, so the cycle repeats. 
+ * 
+ * @param {HTMLSpanElement} textNode - the span currently showing the entered text
+ * @param {string} textBoxType - which kind of input to rebuild ("rowName", "rowAmount", "groupName" )
+ */
 function addAbilityToChangeText(textNode, textBoxType){
 
     textNode.addEventListener('click', (event) => {

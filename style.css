@@ -1,3 +1,9 @@
+:root{
+    --money-positive: #50FA7B;
+    --money-zero: #6272A4;
+    --money-negative: #FF5555;
+}
+
 * {
   box-sizing: border-box;
   font-family: 'Quicksand', sans-serif;
@@ -31,6 +37,32 @@ input{
     border-radius: 6px;
 }
 
+button{
+    font: inherit;
+    font-weight: 600;
+    color: #E6E8F0; 
+    background-color: #BD93F91A;
+    border: 1px solid #FFFFFF14;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 6px; 
+    transition: background-color 150ms, border-color 150ms, transform 100ms, box-shadow 150ms;
+}
+
+button:hover{
+    border-color: #BD93F9;
+    background-color: #BD93F966;
+}
+
+button:focus-visible{
+    border-color: #BD93F9;
+    box-shadow: 0 0 0 3px #BD93F933;
+}
+
+button:active{
+    transform: translateY(1px);
+}
+
 input:hover{
     border: 1px solid #FFFFFF2E; 
 }
@@ -55,6 +87,39 @@ input:focus-visible{
 .page-main{
     display: grid;
     grid-template-columns: 6% 78% 16%;
+}
+
+.inflow-square-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.inflow-square{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 81px;
+    width: 241px;
+    background-color: #2F3140;
+    border-radius: 6px;
+    border: 1px solid #50FA7B33;
+}
+
+.is-positive { 
+    color: var(--money-positive);
+    border: 1px solid var(--money-positive);
+}
+
+.is-zero{ 
+    color: var(--money-zero); 
+    border: 1px solid var(--money-zero);
+}
+
+.is-negative { 
+    color: var(--money-negative); 
+    border: 1px solid var(--money-negative); 
 }
 
 .groups{
@@ -90,10 +155,6 @@ input:focus-visible{
     margin: 25px 0;
     font-size: 0.9em;
     min-width: 400px;
-}
-
-.group-add-button{
-    background: none;
 }
 
 .row{
